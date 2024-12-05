@@ -1,14 +1,17 @@
+"use client";
 import { dateFormatter } from "@/utils/dateFormater";
 import React from "react";
 import styles from "./MovieCard.module.scss";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function MovieCard({ movie }) {
 	const { id, title, release_date, popularity, poster_path, vote_average } =
 		movie;
-
+	const router = useRouter();
 	function goToMovie() {
 		console.log(id);
+		router.push(`/Movie/${id}`);
 	}
 	return (
 		<div className={styles.card} onClick={goToMovie}>

@@ -4,20 +4,20 @@ import styles from "./Header.module.scss";
 
 const Header = () => (
 	<header className={styles.header}>
-		<h1 className={styles.logo}>MovieTracker</h1>
+		{" "}
+		<Link className={styles.logo} href="/">
+			MovieTracker
+		</Link>
 		<nav>
 			<ul className={styles.navList}>
 				<li className={styles.navItem}>
-					<Link href="/">Home</Link>
+					<Link href="/Movies">Movies</Link>
 				</li>
 				<li className={styles.navItem}>
-					<Link href="/watchlist">Watchlist</Link>
+					<Link href="/TVShows">TV Shows</Link>
 				</li>
 				<li className={styles.navItem}>
-					<Link href="/recommendations">Recommendations</Link>
-				</li>
-				<li className={styles.navItem}>
-					<Link href="/profile">Profile</Link>
+					<Link href="/Profile">Profile</Link>
 				</li>
 			</ul>
 		</nav>

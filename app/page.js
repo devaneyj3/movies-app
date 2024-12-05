@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { apiClient } from "@/utils/apiClient";
-import Header from "../components/Header";
 import styles from "./page.module.scss";
 import MovieList from "@/components/MovieList/MovieList";
 import { dateFormatter } from "@/utils/dateFormater";
@@ -31,7 +30,6 @@ export default function Home() {
 
 	return (
 		<div className={styles.page}>
-			<Header />
 			<main className={styles.main}>
 				<h1 className={styles.title}>Welcome to MovieTracker</h1>
 				<p className={styles.description}>
