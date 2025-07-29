@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { apiClient } from "@/utils/apiClient";
-import styles from "./page.module.scss";
 import MovieList from "@/components/MovieList/MovieList";
 import { dateFormatter } from "@/utils/dateFormater";
 
@@ -29,20 +28,20 @@ export default function Home() {
 	const maxDate = dates ? dateFormatter(dates.maximum) : "";
 
 	return (
-		<div className={styles.page}>
-			<main className={styles.main}>
-				<h1 className={styles.title}>Welcome to MovieTracker</h1>
-				<p className={styles.description}>
+		<div>
+			<div className="flex-col justify-items-center p-10">
+				<h1 className="font-bold text-3xl pb-5">Welcome to MovieTracker</h1>
+				<p className="text-xl italic">
 					Track the movies you&apos;ve watched and discover new favorites with
 					ease.
 				</p>
-				{dates && (
-					<h3>
-						Now in theaters between {minDate} and {maxDate}
-					</h3>
-				)}
-				{results && <MovieList data={results} />}
-			</main>
+			</div>
+			{dates && (
+				<h3>
+					Now in theaters between {minDate} and {maxDate}
+				</h3>
+			)}
+			{results && <MovieList data={results} />}
 		</div>
 	);
 }
