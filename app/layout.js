@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import "./globals.css";
+import Providers from "@/components/Providers";
 
 export const metadata = {
 	title: "Movie Tracker",
@@ -9,12 +10,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body>
-				<div className="flex h-screen flex-col">
-					<Header />
-					<main className="flex-1 wrapper">{children}</main>
-				</div>
-			</body>
+			<Providers>
+				<body>
+					<div className="flex h-screen flex-col">
+						<Header />
+						<main className="flex-1 wrapper">{children}</main>
+					</div>
+				</body>
+			</Providers>
 		</html>
 	);
 }
