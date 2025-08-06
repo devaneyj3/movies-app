@@ -7,4 +7,8 @@ const prisma = new PrismaClient();
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [Google],
 	adapter: PrismaAdapter(prisma),
+	pages: {
+		signIn: "/sign-in",
+		signOut: "/sign-out",
+	},
 });
