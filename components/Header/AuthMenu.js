@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { UserIcon } from "lucide-react";
@@ -20,9 +20,11 @@ export default function AuthMenu() {
 					</Button>
 				</>
 			) : (
-				<Button onClick={() => signIn()}>
-					<UserIcon />
-					Sign In
+				<Button asChild variant="ghost">
+					<Link href="/sign-in">
+						<UserIcon />
+						Sign In
+					</Link>
 				</Button>
 			)}
 		</>
