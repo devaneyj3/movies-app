@@ -11,12 +11,15 @@ generator client {
 model User {
   id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String        @default("NO_NAME")
-  email         String          @unique(map: "user_email_idx")
+  address       String?
+  city          String?
+  state         String?
+  zip           String?
+  email         String?   @unique
+  phone         String?
   emailVerified DateTime?       @db.Timestamp(6)
   image         String?
-  role          String          @default("user")
-  address       Json?           @db.Json
-  paymentMethod String?
+  profileComplete Boolean       @default(false)
   account Account[]
   session     Session[]
   createdAt DateTime @default(now()) @db.Timestamp(6)

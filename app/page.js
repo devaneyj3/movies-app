@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import { apiClient } from "@/utils/apiClient";
 import MovieList from "@/components/MovieList/MovieList";
 import { dateFormatter } from "@/utils/dateFormater";
+import { useAuth } from "@/context/authContext";
 
 export default function Home() {
 	const [moviesPlaying, setMoviesPlaying] = useState({});
+	const { signedInUser } = useAuth();
 
 	useEffect(() => {
 		const getMoviesPlaying = async () => {
@@ -29,6 +31,7 @@ export default function Home() {
 
 	return (
 		<div>
+			{signedInUser && <h2>Welcome, {signedInUser.name}!</h2>}
 			<div className="flex-col justify-items-center p-10">
 				<h1 className="font-bold text-3xl pb-5">Welcome to MovieTracker</h1>
 				<p className="text-xl italic">
