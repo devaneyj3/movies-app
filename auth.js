@@ -13,22 +13,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 	},
 	// finding if the user exists in the database, if it does creat new session properties with the existing database properties
 	callbacks: {
-		async session({ session, user }) {
-			// On sign-in, user is defined. On subsequent requests, user is undefined.
-			let dbUser = user;
-			if (!dbUser && session.user?.email) {
-				dbUser = await prisma.user.findUnique({
-					where: { email: session.user.email },
-				});
+		async jwt({ token, user }) {
+			// This runs when user first signs in (user is defined)
+			if (user) {
+				// Store user data in JWT token
+				token.id = user.id;
+				token.phone = user.phone;
+				token.address = user.address;
+				token.city = user.city;
+				token.state = user.state;
+				token.zip = user.zip;
+				token.profileComplete = user.profileComplete;
 			}
-			if (dbUser) {
-				session.user.id = dbUser.id;
-				session.user.phone = dbUser.phone;
-				session.user.address = dbUser.address;
-				session.user.city = dbUser.city;
-				session.user.state = dbUser.state;
-				session.user.zip = dbUser.zip;
-				session.user.profileComplete = dbUser.profileComplete;
+			return token;
+		},
+		async session({ session, token }) {
+			// This runs on every session check, but uses JWT data (no database query)
+			if (token) {
+				session.user.id = token.id;
+				session.user.phone = token.phone;
+				session.user.address = token.address;
+				session.user.city = token.city;
+				session.user.state = token.state;
+				session.user.zip = token.zip;
+				session.user.profileComplete = token.profileComplete;
 			}
 			return session;
 		},
