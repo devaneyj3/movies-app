@@ -40,7 +40,7 @@ export default async function SignInPage({ searchParams }) {
 								throw error;
 							}
 						}}>
-						<Button variant="default" className="w-full">
+						<Button variant="default" className="w-full cursor-pointer">
 							<span>Sign in with Google</span>
 						</Button>
 					</form>

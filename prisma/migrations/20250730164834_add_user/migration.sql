@@ -51,7 +51,7 @@ CREATE TABLE "public"."Session" (
 CREATE TABLE "public"."VerificationToken" (
     "identifier" TEXT NOT NULL,
     "token" TEXT NOT NULL,
-    "expires" TIMESTAMP(3) NOT NULL,
+    "expires" TIMESTAMP,
 
     CONSTRAINT "VerificationToken_pkey" PRIMARY KEY ("identifier","token")
 );
@@ -72,28 +72,47 @@ ALTER TABLE "public"."Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY 
 ALTER TABLE "public"."Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Enable Row Level Security
-ALTER TABLE "User" ENABLE ROW LEVEL SECURITY;
-ALTER TABLE "Account" ENABLE ROW LEVEL SECURITY;
-ALTER TABLE "Session" ENABLE ROW LEVEL SECURITY;
-ALTER TABLE "VerificationToken" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."User" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."Account" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."Session" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."VerificationToken" ENABLE ROW LEVEL SECURITY;
 
 -- Force Row Level Security for table owners
-ALTER TABLE "User" FORCE ROW LEVEL SECURITY;
-ALTER TABLE "Account" FORCE ROW LEVEL SECURITY;
-ALTER TABLE "Session" FORCE ROW LEVEL SECURITY;
-ALTER TABLE "VerificationToken" FORCE ROW LEVEL SECURITY;
+ALTER TABLE "public"."User" FORCE ROW LEVEL SECURITY;
+ALTER TABLE "public"."Account" FORCE ROW LEVEL SECURITY;
+ALTER TABLE "public"."Session" FORCE ROW LEVEL SECURITY;
+ALTER TABLE "public"."VerificationToken" FORCE ROW LEVEL SECURITY;
+-- READ: authenticated users can read only their own row
+CREATE POLICY "user_select_own"
+ON "public"."User"
+FOR SELECT
+TO authenticated
+USING (
+  "email" IS NOT NULL
+  AND "email" = current_setting('app.user_email', TRUE)
+);
 
--- Create row security policies
--- User can only access their own data
-CREATE POLICY "user_own_data" ON "User" USING ("email" = current_setting('app.user_email', TRUE));
+-- INSERT: authenticated users can insert only a row for themselves
+CREATE POLICY "user_insert_own"
+ON "public"."User"
+FOR INSERT
+TO authenticated
+WITH CHECK (
+  "email" IS NOT NULL
+  AND "email" = current_setting('app.user_email', TRUE)
+);
 
--- Account can only be accessed by the user who owns it
-CREATE POLICY "account_own_data" ON "Account" USING ("userId" = current_setting('app.user_id', TRUE)::uuid);
-
--- Session can only be accessed by the user who owns it
-CREATE POLICY "session_own_data" ON "Session" USING ("userId" = current_setting('app.user_id', TRUE)::uuid);
-
--- VerificationToken can only be accessed by the user who owns it (if you want to restrict by user)
--- Note: This might be too restrictive for email verification flows
-CREATE POLICY "verification_token_own_data" ON "VerificationToken" USING (true);
+-- UPDATE: authenticated users can update only their own row
+CREATE POLICY "user_update_own"
+ON "public"."User"
+FOR UPDATE
+TO authenticated
+USING (
+  "email" IS NOT NULL
+  AND "email" = current_setting('app.user_email', TRUE)
+)
+WITH CHECK (
+  "email" IS NOT NULL
+  AND "email" = current_setting('app.user_email', TRUE)
+);
 
