@@ -1,11 +1,10 @@
 import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
-import styles from "./MovieList.module.scss";
 
 export default function MovieList({ data }) {
 	console.log(data);
 	return (
-		<section className={styles.cardContainer}>
+		<section className="grid grid-cols-4 gap-4">
 			{data.map((movie) => {
 				return <MovieCard key={movie.id} movie={movie} />;
 			})}

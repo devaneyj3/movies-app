@@ -3,8 +3,8 @@ import { apiClient } from "@/utils/apiClient";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import styles from "./movie.module.scss";
-import { Button } from "reactstrap";
+import styles from "./Movie.module.scss";
+import { Button } from "@/components/ui/button";
 
 export default function Movie() {
 	const { movieId } = useParams();
@@ -24,7 +24,6 @@ export default function Movie() {
 		overview,
 		tagline,
 		release_date,
-		statues,
 		runtime,
 		revenue,
 		poster_path,
@@ -35,10 +34,9 @@ export default function Movie() {
 	} = movieDetails;
 
 	return (
-		<div>
+		<>
 			{movieDetails ? (
-				<div>
-					<h2>{title}</h2>
+				<div className={styles.movieContainer}>
 					<div className={styles.imageContainer}>
 						<Image
 							src={`https://image.tmdb.org/t/p/w500${poster_path}`}
@@ -46,28 +44,74 @@ export default function Movie() {
 							height={300}
 							alt={`${title} Poster`}
 						/>
+						<Button
+							className="mt-2 w-full bg-green-400"
+							variant="secondary"
+							size="lg">
+							Add to my list
+						</Button>
 					</div>
-					<p>{tagline}</p>
-					<p>{release_date}</p>
-					<p>{overview}</p>
-					<p>{statues}</p>
-					<p>{runtime}</p>
-					<p>{revenue}</p>
-					<p>{budget}</p>
-					<p>{vote_average}</p>
-					{genres &&
-						genres.map((genre) => {
-							return (
-								<div key={genre.id}>
-									<p>{genre.name}</p>
+					<div className={styles.details}>
+						<h2 className="font-bold">{title}</h2>
+
+						{release_date && (
+							<>
+								<span className={styles.label}>Release date:</span>
+								<span className={styles.value}>{release_date}</span>
+							</>
+						)}
+
+						{runtime && (
+							<>
+								<span className={styles.label}>Runtime:</span>
+								<span className={styles.value}>{runtime} min</span>
+							</>
+						)}
+
+						<span className={styles.label}>Revenue:</span>
+						<span className={styles.value}>${revenue?.toLocaleString()}</span>
+
+						{budget && (
+							<>
+								<span className={styles.label}>Budget:</span>
+								<span className={styles.value}>
+									${budget?.toLocaleString()}
+								</span>
+							</>
+						)}
+
+						{vote_average && (
+							<>
+								<span className={styles.label}>Vote average:</span>
+								<span className={styles.value}>{vote_average}/10</span>
+							</>
+						)}
+						{overview && (
+							<div className={styles.fullRow}>
+								<p className={styles.value}>{overview}</p>
+							</div>
+						)}
+
+						{genres && genres.length > 0 && (
+							<div className={styles.genresSection}>
+								<div className={styles.genresList}>
+									{genres.map((genre) => (
+										<div key={genre.id}>
+											<Button
+												variant="ghost"
+												className="mt-2 w-full bg-green-400">
+												{genre.name}
+											</Button>
+										</div>
+									))}
 								</div>
-							);
-						})}
-					<Button color="success">Add to my list</Button>
+							</div>
+						)}
+					</div>
 				</div>
 			) : (
 				<h2>No details</h2>
 			)}
-		</div>
+		</>
 	);
 }
