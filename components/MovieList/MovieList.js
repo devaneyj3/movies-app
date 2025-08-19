@@ -2,7 +2,6 @@ import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
 
 export default function MovieList({ data }) {
-	console.log(data);
 	return (
 		<section className="grid grid-cols-4 gap-4">
 			{data.map((movie) => {

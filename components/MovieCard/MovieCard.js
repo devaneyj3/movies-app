@@ -10,7 +10,6 @@ export default function MovieCard({ movie }) {
 		movie;
 	const router = useRouter();
 	function goToMovie() {
-		console.log(id);
 		router.push(`/Movie/${id}`);
 	}
 	return (

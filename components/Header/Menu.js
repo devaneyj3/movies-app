@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { EllipsisVertical } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
-import UserButton from "./user-button";
+// import UserButton from "./user-button";
 
 const Menu = () => {
 	return (
@@ -14,7 +14,7 @@ const Menu = () => {
 				<Button asChild variant="ghost">
 					<Link href="/TVShows">TV Shows</Link>
 				</Button>
-				<UserButton />
+				{/* <UserButton /> */}
 			</nav>
 			<nav className="md:hidden">
 				<Sheet>
@@ -29,7 +29,7 @@ const Menu = () => {
 						<Button asChild variant="ghost">
 							<Link href="/TVShows">TV Shows</Link>
 						</Button>
-						<UserButton />
+						{/* <UserButton /> */}
 					</SheetContent>
 				</Sheet>
 			</nav>
