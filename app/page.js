@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import { apiClient } from "@/utils/apiClient";
 import MovieList from "@/components/MovieList/MovieList";
 import { dateFormatter } from "@/utils/dateFormater";
-import { useAuth } from "@/context/authContext";
+import styles from "./home.module.scss";
 
 export default function Home() {
 	const [moviesPlaying, setMoviesPlaying] = useState({});
-	const { signedInUser } = useAuth();
 
 	useEffect(() => {
 		const getMoviesPlaying = async () => {
@@ -31,16 +30,18 @@ export default function Home() {
 
 	return (
 		<div>
-			{signedInUser && <h2>Welcome, {signedInUser.name}!</h2>}
+			{/* {signedInUser && <h2>Welcome, {signedInUser.name}!</h2>} */}
 			<div className="flex-col justify-items-center p-10">
-				<h1 className="font-bold text-3xl pb-5">Welcome to MovieTracker</h1>
-				<p className="text-xl italic">
+				<h1 className="font-bold text-3xl pb-5 text-white">
+					Welcome to MovieTracker
+				</h1>
+				<p className="text-xl italic text-white">
 					Track the movies you&apos;ve watched and discover new favorites with
 					ease.
 				</p>
 			</div>
 			{dates && (
-				<h3>
+				<h3 className={styles.label}>
 					Now in theaters between {minDate} and {maxDate}
 				</h3>
 			)}

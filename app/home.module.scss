@@ -1,0 +1,6 @@
+@use '../mixins';
+.label {
+  margin-bottom: 20px;
+  font-weight: bold;
+  @include mixins.white;
+}

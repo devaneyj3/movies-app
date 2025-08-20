@@ -10,10 +10,11 @@ export default function MovieCard({ movie }) {
 		movie;
 	const router = useRouter();
 	function goToMovie() {
+		console.log(id);
 		router.push(`/Movie/${id}`);
 	}
 	return (
-		<div className={styles.card} onClick={goToMovie}>
+		<div onClick={goToMovie}>
 			{poster_path ? (
 				<div className={styles.imageContainer}>
 					<Image

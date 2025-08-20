@@ -25,10 +25,12 @@
   .label {
     font-weight: bold;
     text-align: left;
+    color: white;
   }
   
   .value {
     text-align: left;
+    color: gray;
   }
   
   /* Make overview span both columns */
@@ -68,6 +70,7 @@
     width: 100%;
     .label {
       text-align: left;
+      color: white;
     }
   }
 }

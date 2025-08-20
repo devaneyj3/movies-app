@@ -43,7 +43,7 @@ export default function MovieDetails({ movieDetails }) {
 					</Button>
 				</div>
 				<div className={styles.details}>
-					<h2 className="font-bold text-4xl">{title}</h2>
+					<h2 className="font-bold text-4xl text-white">{title}</h2>
 
 					<span className={styles.label}>Release date:</span>
 					<span className={styles.value}>{release_date}</span>

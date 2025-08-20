@@ -1,19 +1,17 @@
-.card {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  cursor: pointer;
-}
+
 .imageContainer {
   img {
-    border-radius: 10%;
+    border-radius: 3%;
   }
 }
 
 .info {
+  text-align: center;
   margin-top: 20px;
   .title {
     font-weight: bold;
+    max-width: 200px;
+    color: white;
   }
   .date {
     color: gray;
