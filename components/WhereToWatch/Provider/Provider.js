@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export default function Provider({ label, value, whereToWatch }) {
 	return (
 		<div className={styles.provider}>
-			<h1>{label}</h1>
+			<h1 className="text-white">{label}</h1>
 			{whereToWatch[value] &&
 				whereToWatch[value].map((provider, index) => {
 					return (

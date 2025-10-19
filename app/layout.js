@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import "./tailwind.css";
 import Providers from "@/components/Providers";
+import styles from "./layout.module.scss";
 
 export const metadata = {
 	title: "Movie Tracker",
@@ -12,10 +13,8 @@ export default function RootLayout({ children }) {
 		<html lang="en">
 			<Providers>
 				<body>
-					<div className="flex h-screen flex-col">
-						<Header />
-						<main className="flex-1 wrapper">{children}</main>
-					</div>
+					<Header />
+					<main className={styles.main}>{children}</main>
 				</body>
 			</Providers>
 		</html>

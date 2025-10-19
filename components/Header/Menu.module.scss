@@ -1,0 +1,43 @@
+// Menu component styles
+.menuContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem; // gap-3
+}
+
+.desktopNav {
+  display: none;
+  width: 100%;
+  max-width: 20rem; // max-w-xs
+  gap: 0.25rem; // gap-1
+  
+  @media (min-width: 768px) {
+    display: flex;
+  }
+}
+
+.mobileNav {
+  display: block;
+  
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.navButton {
+  // Ghost button styling will be handled by the Button component
+  // This class can be used for additional customizations if needed
+}
+
+.sheetContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.sheetTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}

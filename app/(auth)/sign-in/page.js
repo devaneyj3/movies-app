@@ -31,7 +31,7 @@ export default async function SignInPage({ searchParams }) {
 							"use server";
 							try {
 								await signIn("google", {
-									redirectTo: callbackUrl ?? "/",
+									redirectTo: callbackUrl ?? "/Profile",
 								});
 							} catch (error) {
 								if (error instanceof AuthError) {

@@ -2,14 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import Menu from "./Menu";
 import { Film } from "lucide-react";
+import styles from "./Header.module.scss";
 
 const Header = () => {
 	return (
-		<header className="w-full bg-emerald-800">
-			<div className="wrapper flex-between">
-				<div className="flex-start">
-					<Link href="/" className="flex-start">
-						<Film />
+		<header className={styles.header}>
+			<div className={styles.headerContent}>
+				<div className={styles.logoContainer}>
+					<Link href="/" className={styles.logoLink}>
+						<Film className={styles.logoIcon} />
 					</Link>
 				</div>
 				<Menu />

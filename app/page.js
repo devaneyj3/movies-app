@@ -29,23 +29,46 @@ export default function Home() {
 	const maxDate = dates ? dateFormatter(dates.maximum) : "";
 
 	return (
-		<div>
-			{/* {signedInUser && <h2>Welcome, {signedInUser.name}!</h2>} */}
-			<div className="flex-col justify-items-center p-10">
-				<h1 className="font-bold text-3xl pb-5 text-white">
-					Welcome to MovieTracker
-				</h1>
-				<p className="text-xl italic text-white">
-					Track the movies you&apos;ve watched and discover new favorites with
-					ease.
-				</p>
+		<div className={styles.pageContainer}>
+			{/* Hero Section */}
+			<div className={styles.heroSection}>
+				<div className={styles.heroContent}>
+					<div className={styles.heroTextContainer}>
+						<h1 className={styles.heroTitle}>Welcome to MovieTracker</h1>
+						<p className={styles.heroSubtitle}>
+							Track the movies you&apos;ve watched and discover new favorites
+							with ease. Your personal cinema journey starts here.
+						</p>
+
+						{/* Decorative elements */}
+						<div className={styles.decorativeDots}>
+							<div className={styles.dot}></div>
+							<div className={styles.dot}></div>
+							<div className={styles.dot}></div>
+						</div>
+					</div>
+				</div>
 			</div>
-			{dates && (
-				<h3 className={styles.label}>
-					Now in theaters between {minDate} and {maxDate}
-				</h3>
-			)}
-			{results && <MovieList data={results} />}
+
+			{/* Movies Section */}
+			<div className={styles.moviesSection}>
+				{dates && (
+					<div className={styles.moviesHeader}>
+						<div className={styles.moviesTitleContainer}>
+							<h2 className={styles.moviesTitle}>Now Playing in Theaters</h2>
+							<p className={styles.moviesSubtitle}>
+								Movies currently showing between {minDate} and {maxDate}
+							</p>
+						</div>
+					</div>
+				)}
+
+				{results && (
+					<div className={styles.moviesListContainer}>
+						<MovieList data={results} />
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }

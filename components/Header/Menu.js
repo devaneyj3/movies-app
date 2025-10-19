@@ -2,34 +2,35 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { EllipsisVertical } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
-// import UserButton from "./user-button";
+import UserButton from "./user-button";
+import styles from "./Menu.module.scss";
 
 const Menu = () => {
 	return (
-		<div className="flex justify-end gap-3">
-			<nav className="md:flex hidden w-full max-w-xs gap-1">
+		<div className={styles.menuContainer}>
+			<nav className={styles.desktopNav}>
 				<Button asChild variant="ghost">
 					<Link href="/">Movies</Link>
 				</Button>
 				<Button asChild variant="ghost">
 					<Link href="/TVShows">TV Shows</Link>
 				</Button>
-				{/* <UserButton /> */}
+				<UserButton />
 			</nav>
-			<nav className="md:hidden">
+			<nav className={styles.mobileNav}>
 				<Sheet>
 					<SheetTrigger className="align-middle">
 						<EllipsisVertical />
 					</SheetTrigger>
-					<SheetContent className="flex flex-col items-start">
-						<SheetTitle>Menu</SheetTitle>
+					<SheetContent className={styles.sheetContent}>
+						<SheetTitle className={styles.sheetTitle}>Menu</SheetTitle>
 						<Button asChild variant="ghost">
 							<Link href="/">Movies</Link>
 						</Button>
 						<Button asChild variant="ghost">
 							<Link href="/TVShows">TV Shows</Link>
 						</Button>
-						{/* <UserButton /> */}
+						<UserButton />
 					</SheetContent>
 				</Sheet>
 			</nav>

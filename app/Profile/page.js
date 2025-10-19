@@ -1,11 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function Profile() {
 	const { data: session } = useSession();
 	const [testResults, setTestResults] = useState(null);
 	const [loading, setLoading] = useState(false);
+
+	console.log(session);
 
 	const testRLS = async () => {
 		setLoading(true);
@@ -21,6 +24,11 @@ export default function Profile() {
 
 	return (
 		<div className="p-6 max-w-4xl mx-auto">
+			<Image
+				src={session?.user.image}
+				width={400}
+				height={400}
+				alt={session?.user?.name}></Image>
 			<h1 className="text-2xl font-bold mb-6">Profile Page</h1>
 
 			<div className="mb-6 p-4 bg-gray-100 rounded">

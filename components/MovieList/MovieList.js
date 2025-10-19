@@ -10,6 +10,9 @@ import {
 } from "@/components/ui/carousel";
 
 export default function MovieList({ data }) {
+	// Sort a copy of the data by vote_average (ascending)
+	const sortedData = [...data].sort((a, b) => b.vote_average - a.vote_average);
+
 	return (
 		<Carousel
 			opts={{
@@ -17,11 +20,11 @@ export default function MovieList({ data }) {
 			}}
 			className="w-full">
 			<CarouselContent>
-				{data.map((movie, index) => {
+				{sortedData.map((movie, index) => {
 					return (
 						<CarouselItem
 							key={index}
-							className="pl-1 md:basis-1/2 lg:basis-1/3">
+							className="pl-1 basis-1/3 md:basis-1/5 lg:basis-1/5">
 							<div className="flex items-center justify-center ">
 								<MovieCard key={movie.id} movie={movie} />
 							</div>

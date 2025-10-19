@@ -44,24 +44,6 @@
   --radius-sm: calc(var(--radius) - 4px);
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-}
-
 @utility wrapper {
   @apply max-w-7xl lg:mx-auto p-5 md:px-10 w-full;
 }
@@ -148,28 +130,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground;
+   background: linear-gradient(135deg, #1f2937 0%, #000000 50%, #1f2937 100%);
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/* Uploadthing button text override */
-html.dark .upload-field .text-white {
-  color: #ffffff !important;
-}
-
-.upload-field .text-white {
-  color: #000 !important;
-}
-
-html {
-  background-color: #000 !important;
-}
