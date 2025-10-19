@@ -1,0 +1,24 @@
+// NavigationLinks component styles
+.navLinks {
+  display: flex;
+  gap: 0.25rem; // gap-1
+}
+
+.navButton {
+  // Ghost button styling will be handled by the Button component
+  // This class can be used for additional customizations if needed
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .navLinks {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+}

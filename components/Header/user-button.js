@@ -1,6 +1,7 @@
+"use client";
 import React from "react";
 import { Button } from "../ui/button";
-import { UserIcon, LogOut } from "lucide-react";
+import { UserIcon, LogOut, List } from "lucide-react";
 
 import Link from "next/link";
 import {
@@ -10,11 +11,14 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 } from "../ui/dropdown-menu";
-import { auth, signOut } from "@/auth";
+import { signOut } from "next-auth/react";
 import styles from "./UserButton.module.scss";
+import { useAuth } from "@/context/authContext";
+import { useSession } from "next-auth/react";
 
-const UserButton = async () => {
-	const session = await auth();
+const UserButton = () => {
+	const { data: session } = useSession();
+	const { setSignedInUser } = useAuth();
 
 	if (!session) {
 		return (
@@ -54,16 +58,26 @@ const UserButton = async () => {
 						</Button>
 					</DropdownMenuItem>
 					<DropdownMenuItem className={styles.dropdownItem}>
-						<form
-							action={async () => {
-								"use server";
-								await signOut();
+						<Button className={styles.dropdownButton} variant="ghost" asChild>
+							<Link href="/MovieList">
+								<List />
+								Movie List
+							</Link>
+						</Button>
+					</DropdownMenuItem>
+					<DropdownMenuItem className={styles.dropdownItem}>
+						<Button
+							className={styles.dropdownButton}
+							variant="ghost"
+							onClick={async () => {
+								// Set signedInUser to null immediately
+								setSignedInUser(null);
+								// Then sign out
+								await signOut({ callbackUrl: "/" });
 							}}>
-							<Button className={styles.dropdownButton} variant="ghost">
-								<LogOut />
-								Sign Out
-							</Button>
-						</form>
+							<LogOut />
+							Sign Out
+						</Button>
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>

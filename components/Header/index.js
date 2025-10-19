@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import Menu from "./Menu";
 import { Film } from "lucide-react";
